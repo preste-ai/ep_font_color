@@ -8,7 +8,7 @@ const postAceInit = (hook, context) => {
   const hs = $(".color-selection, #color-selection");
   hs.on("change", function () {
     const value = $(this).val();
-    const intValue = parseInt(value, 10);
+    const intValue = parseInt(value, 0);
     if (!isNaN(intValue)) {
       context.ace.callWithAce(
         (ace) => {
@@ -17,7 +17,7 @@ const postAceInit = (hook, context) => {
         "insertColor",
         true
       );
-      hs.val("dummy");
+      hs.val("0");
     }
   });
   $(".font_color").hover(() => {
@@ -112,7 +112,7 @@ const aceEditEvent = (hook, call) => {
   setTimeout(() => {
     // avoid race condition..
     const colorSelect = $(".color-selection, #color-selection");
-    colorSelect.val("dummy"); // reset value to the dummy value
+    colorSelect.val("0"); // reset value to the dummy value
     colorSelect.niceSelect("update");
     // Attribtes are never available on the first X caret position so we need to ignore that
     if (rep.selStart[1] === 0) {
